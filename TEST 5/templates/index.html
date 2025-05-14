@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DES Web App</title>
+    <style>
+        /* Reset some default styles */
+        body, h2, label, input, select, button {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f4f4f9;
+            color: #333;
+            padding: 20px;
+            font-size: 16px;
+        }
+
+        /* Container for centering the content */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="file"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .container {
+                width: 100%;
+                padding: 15px;
+            }
+
+            button {
+                font-size: 16px;
+            }
+        }
+
+        /* Download Link Style */
+        .download-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .download-link a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .download-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>DES File Encryption/Decryption</h2>
+        <form method="POST" enctype="multipart/form-data" action="/process">
+            <label>Upload File:</label>
+            <input type="file" name="file" required><br>
+
+            <label>Enter 8-char Key:</label>
+            <input type="text" name="key" maxlength="8" required><br>
+
+            <label>Choose Mode:</label>
+            <select name="mode">
+                <option value="encrypt">Encrypt</option>
+                <option value="decrypt">Decrypt</option>
+            </select><br>
+
+            <button type="submit">Run</button>
+        </form>
+
+        {% if download %}
+            <div class="download-link">
+                <a href="/download">Download Processed File</a>
+            </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
