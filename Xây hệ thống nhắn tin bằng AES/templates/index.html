@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Secure Chat - AES WebSocket</title>
+  <!-- Kết nối CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <!-- Kết nối Socket.IO client (phiên bản tương thích) -->
+  <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"
+          integrity="sha384-1pVN7sJkWdW1A4mlGV0xFO0vMseViYpy8BujQeKlTZEemkQVhzqGvj3X55hTp1Ek"
+          crossorigin="anonymous"></script>
+  <!-- Thêm CryptoJS (hoặc đưa AES vào JS) 
+       Ở đây, để đơn giản, ta có thể dùng CryptoJS trong client để giải mã mã hóa. 
+       Nhưng nếu muốn “đồng nhất” dùng Python, cần triển khai AES bằng JS 
+       (ví dụ: dùng thư viện crypto-js).
+  -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"
+          integrity="sha512-GkSuPRXBrZoL82mZNerVhV3NQqtV96nY6mrT4C8rsZdUZC9TXu5DpqZqQQmT6LbOpbE5W6NAXq5QmQFL2UnQ3g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- Kết nối file JS do ta viết: client.js -->
+  <script src="{{ url_for('static', filename='client.js') }}" defer></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Secure Chat (AES + WebSocket)</h1>
+    <div class="config">
+      <label for="username">Tên hiển thị:</label>
+      <input type="text" id="username" placeholder="Nhập tên bạn..." />
+
+      <label for="keyInput">Mật khẩu (Key):</label>
+      <input type="text" id="keyInput" placeholder="Nhập key (độ dài tự do)" />
+    </div>
+
+    <div class="chat-window">
+      <div id="messages"></div>
+    </div>
+
+    <div class="input-area">
+      <textarea id="messageInput" rows="3" placeholder="Nhập tin nhắn ở đây..."></textarea>
+      <button id="sendBtn">Gửi</button>
+    </div>
+  </div>
+</body>
+</html>
